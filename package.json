@@ -4,7 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
-  "homepage": "https://airhawks.github.io/KH-QuotationList/",
+  "homepage": "https://airhawks.github.io/KH-InteriorQuotation/",
   "dependencies": {
     "@popperjs/core": "2.11.6",
     "bootstrap": "5.2.3",
