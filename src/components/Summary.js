@@ -44,11 +44,7 @@ const to2DecimalPlaces = (numberOrString) => {
   return numberFormatter.format(numberOrString);
 };
 
-export default function Summary({
-  name = "Client Name",
-  quotationNumber = 0,
-  quotationDate = new Date(),
-}) {
+export default function Summary({ quotationDate = new Date() }) {
   const localDataString = window.localStorage.getItem("KH_data");
   const data = JSON.parse(localDataString || "[]");
 
@@ -134,7 +130,10 @@ export default function Summary({
         <div className="row"></div>
         <div className="row"></div>
         <Divider />
-        <table className="my-3 table table-striped" style={{ width: "100%" }}>
+        <table
+          className="my-3 table table-striped table-bordered"
+          style={{ width: "100%" }}
+        >
           <thead>
             <tr>
               {COLS.map((column) => (
@@ -154,38 +153,91 @@ export default function Summary({
             </tr>
           </thead>
           <tbody>
-            {data.map(({ description, image, unit, quantity, rate }, index) => (
-              <tr className="text-center" key={index}>
-                <th scope="row">{index + 1}</th>
-                <td className="text-start">
-                  {description
-                    ? description.split("\n").map((line, index) => {
-                        if (line.startsWith("HH ")) {
+            {data.map(
+              (
+                {
+                  description,
+                  serialNumber,
+                  isHeader,
+                  image,
+                  unit,
+                  quantity,
+                  rate,
+                },
+                index
+              ) => (
+                <tr className="text-center" key={index}>
+                  <th scope="row">{serialNumber}</th>
+                  <td className="text-start">
+                    {description
+                      ? description.split("\n").map((line, index) => {
+                          if (line.startsWith("HH ")) {
+                            return (
+                              <div className="fw-bold h6" key={index + line}>
+                                {line.replace(/HH /, "")}
+                              </div>
+                            );
+                          } else if (line.startsWith("BB ")) {
+                            return (
+                              <div
+                                key={index + line}
+                                className="fw-semibold fst-italic"
+                              >
+                                {line.replace(/BB /, "")}
+                              </div>
+                            );
+                          } else if (line.startsWith("RR ")) {
+                            return (
+                              <div key={index + line} className="text-danger">
+                                {line.replace(/RR /, "")}
+                              </div>
+                            );
+                          } else if (line.startsWith("BL ")) {
+                            return (
+                              <div key={index + line} className="text-primary">
+                                {line.replace(/BL /, "")}
+                              </div>
+                            );
+                          }
                           return (
-                            <div className="fw-bold h6" key={index + line}>
-                              {line.replace(/HH /, "")}
+                            <div key={index + line}>
+                              {line.split("**").map((separatedText, index) =>
+                                index % 2 === 1 ? (
+                                  <span
+                                    key={index + separatedText}
+                                    className="fw-semibold"
+                                  >
+                                    {separatedText}
+                                  </span>
+                                ) : (
+                                  <span key={index + separatedText}>
+                                    {separatedText}
+                                  </span>
+                                )
+                              )}
                             </div>
                           );
-                        } else if (line.startsWith("BB ")) {
-                          return (
-                            <div
-                              key={index + line}
-                              className="fw-semibold fst-italic"
-                            >
-                              {line.replace(/BB /, "")}
-                            </div>
-                          );
-                        }
-                        return <div key={index + line}>{line}</div>;
-                      })
-                    : null}
-                </td>
-                <td>{quantity}</td>
-                <td>{unit}</td>
-                <td>{to2DecimalPlaces(rate || 0)}</td>
-                <td>{to2DecimalPlaces((quantity || 0) * (rate || 0))}</td>
-              </tr>
-            ))}
+                        })
+                      : null}
+                  </td>
+                  {isHeader ? (
+                    <>
+                      <td />
+                      <td />
+                      <td />
+                      <td />
+                    </>
+                  ) : (
+                    <>
+                      <td>{quantity}</td>
+                      <td>{unit}</td>
+                      <td>{to2DecimalPlaces(rate || 0)}</td>
+                      <td>{to2DecimalPlaces((quantity || 0) * (rate || 0))}</td>
+                    </>
+                  )}
+                </tr>
+              )
+            )}
           </tbody>
         </table>
         <Divider />
