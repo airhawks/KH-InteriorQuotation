@@ -26,7 +26,7 @@ export default function ClientDetails() {
         Name
       </label>
       <input
-        className="form-control"
+        className="form-control form-control-inline"
         id="name"
         defaultValue={name}
         onChange={(e) => onChangeField("name", e.target.value)}
@@ -36,7 +36,7 @@ export default function ClientDetails() {
         Address
       </label>
       <input
-        className="form-control"
+        className="form-control  form-control-inline"
         id="address"
         defaultValue={address}
         onChange={(e) => onChangeField("address", e.target.value)}
