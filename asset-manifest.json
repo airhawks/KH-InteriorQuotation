@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/KH-QuotationList/static/css/main.604cf43d.chunk.css",
-    "main.js": "/KH-QuotationList/static/js/main.4b7f597a.chunk.js",
-    "main.js.map": "/KH-QuotationList/static/js/main.4b7f597a.chunk.js.map",
-    "runtime-main.js": "/KH-QuotationList/static/js/runtime-main.716635c0.js",
-    "runtime-main.js.map": "/KH-QuotationList/static/js/runtime-main.716635c0.js.map",
-    "static/css/2.f26e749f.chunk.css": "/KH-QuotationList/static/css/2.f26e749f.chunk.css",
-    "static/js/2.e745998d.chunk.js": "/KH-QuotationList/static/js/2.e745998d.chunk.js",
-    "static/js/2.e745998d.chunk.js.map": "/KH-QuotationList/static/js/2.e745998d.chunk.js.map",
-    "index.html": "/KH-QuotationList/index.html",
-    "static/css/2.f26e749f.chunk.css.map": "/KH-QuotationList/static/css/2.f26e749f.chunk.css.map",
-    "static/css/main.604cf43d.chunk.css.map": "/KH-QuotationList/static/css/main.604cf43d.chunk.css.map",
-    "static/js/2.e745998d.chunk.js.LICENSE.txt": "/KH-QuotationList/static/js/2.e745998d.chunk.js.LICENSE.txt",
-    "static/media/logo.a80f59c2.png": "/KH-QuotationList/static/media/logo.a80f59c2.png"
+    "main.css": "/KH-InteriorQuotation/static/css/main.604cf43d.chunk.css",
+    "main.js": "/KH-InteriorQuotation/static/js/main.4b7f597a.chunk.js",
+    "main.js.map": "/KH-InteriorQuotation/static/js/main.4b7f597a.chunk.js.map",
+    "runtime-main.js": "/KH-InteriorQuotation/static/js/runtime-main.98d44802.js",
+    "runtime-main.js.map": "/KH-InteriorQuotation/static/js/runtime-main.98d44802.js.map",
+    "static/css/2.f26e749f.chunk.css": "/KH-InteriorQuotation/static/css/2.f26e749f.chunk.css",
+    "static/js/2.1d29206d.chunk.js": "/KH-InteriorQuotation/static/js/2.1d29206d.chunk.js",
+    "static/js/2.1d29206d.chunk.js.map": "/KH-InteriorQuotation/static/js/2.1d29206d.chunk.js.map",
+    "index.html": "/KH-InteriorQuotation/index.html",
+    "static/css/2.f26e749f.chunk.css.map": "/KH-InteriorQuotation/static/css/2.f26e749f.chunk.css.map",
+    "static/css/main.604cf43d.chunk.css.map": "/KH-InteriorQuotation/static/css/main.604cf43d.chunk.css.map",
+    "static/js/2.1d29206d.chunk.js.LICENSE.txt": "/KH-InteriorQuotation/static/js/2.1d29206d.chunk.js.LICENSE.txt",
+    "static/media/logo.a80f59c2.png": "/KH-InteriorQuotation/static/media/logo.a80f59c2.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.716635c0.js",
+    "static/js/runtime-main.98d44802.js",
     "static/css/2.f26e749f.chunk.css",
-    "static/js/2.e745998d.chunk.js",
+    "static/js/2.1d29206d.chunk.js",
     "static/css/main.604cf43d.chunk.css",
     "static/js/main.4b7f597a.chunk.js"
   ]
