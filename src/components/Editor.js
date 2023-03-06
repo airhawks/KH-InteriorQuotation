@@ -1,6 +1,7 @@
 import * as React from "react";
 import FormItem from "./ItemForm";
 import ClientDetails from "./ClientDetails";
+import * as XLSX from "xlsx/xlsx.mjs";
 
 const COLS = ["Sr. No.", "Description", "Quantity", "Unit", "Rate", "Amount"];
 
@@ -16,6 +17,16 @@ const COLS_SIZES = {
 
 const localDataString = window.localStorage.getItem("KH_data");
 let localData = JSON.parse(localDataString || "[]");
+
+/* Callback invoked when the button is clicked */
+const xport = async () => {
+  /* Create worksheet from HTML DOM TABLE */
+  const table = document.getElementById("editor-table");
+  const wb = XLSX.utils.table_to_book(table);
+
+  /* Export to file (start a download) */
+  XLSX.writeFile(wb, "InteriorQuotation.xlsx");
+};
 
 export default function Editor() {
   const [data, updateData] = React.useState(localData);
@@ -62,12 +73,10 @@ export default function Editor() {
   return (
     <div className="container-fluid ">
       <ClientDetails />
+      <button type="button" className="btn btn-primary" onClick={xport}>
+        Export Data
+      </button>
       <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
-        {/* <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={addItem}
-        ></button> */}
         {focussedItem !== null ? (
           <button
             type="button"
@@ -106,6 +115,7 @@ export default function Editor() {
       </div>
       <table
         className="table table-dark table-striped table-bordered"
+        id="editor-table"
         style={{ width: "100%" }}
       >
         <thead>

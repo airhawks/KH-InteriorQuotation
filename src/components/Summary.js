@@ -67,7 +67,9 @@ export default function Summary({ quotationDate = new Date() }) {
           <VR />
           <div className="col">
             <strong className="text-center">
-              <p className="h4 fw-semibold">QUOTATION </p>
+              <p className="h4 fw-semibold">
+                Proposed estimate for the interior work
+              </p>
               <p
                 className="h2 fw-bold"
                 style={{
@@ -121,10 +123,9 @@ export default function Summary({ quotationDate = new Date() }) {
           </div>
         </div>
         <Divider />
-        <div className="row">
+        <div className="row text-center">
           <p className="ms-2">
-            In Accordance with your request inquiry, we are pleased to submit
-            the following Quotation with our Best Prices
+            Total Carpet Area = {clientData.carpetArea} Sqft
           </p>
         </div>
         <div className="row"></div>

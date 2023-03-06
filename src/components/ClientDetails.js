@@ -5,7 +5,7 @@ let localData = JSON.parse(localDataString || "{}");
 
 export default function ClientDetails() {
   const [data, updateData] = React.useState(localData);
-  const { name, address, contact, quotationNumber } = data;
+  const { name, address, contact, quotationNumber, carpetArea } = data;
 
   const setData = (data) => {
     window.localStorage.setItem("KH_ClientDetails", JSON.stringify(data));
@@ -15,7 +15,7 @@ export default function ClientDetails() {
   const onChangeField = (field, value) => {
     const updatedData = {
       ...data,
-      [field]: value
+      [field]: value,
     };
     setData(updatedData);
   };
@@ -26,7 +26,7 @@ export default function ClientDetails() {
         Name
       </label>
       <input
-        className="form-control"
+        className="form-control form-control-inline"
         id="name"
         defaultValue={name}
         onChange={(e) => onChangeField("name", e.target.value)}
@@ -36,7 +36,7 @@ export default function ClientDetails() {
         Address
       </label>
       <input
-        className="form-control"
+        className="form-control  form-control-inline"
         id="address"
         defaultValue={address}
         onChange={(e) => onChangeField("address", e.target.value)}
@@ -58,6 +58,16 @@ export default function ClientDetails() {
         id="quotationNumber"
         defaultValue={quotationNumber}
         onChange={(e) => onChangeField("quotationNumber", e.target.value)}
+      />
+
+      <label htmlFor="carpetArea" className="mt-3 form-label">
+        Carpet Area
+      </label>
+      <input
+        className="form-control"
+        id="carpetArea"
+        defaultValue={carpetArea}
+        onChange={(e) => onChangeField("carpetArea", e.target.value)}
       />
     </div>
   );
