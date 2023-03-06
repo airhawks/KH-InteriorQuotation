@@ -192,6 +192,12 @@ export default function Summary({ quotationDate = new Date() }) {
                                 {line.replace(/RR /, "")}
                               </div>
                             );
+                          } else if (line.startsWith("BL ")) {
+                            return (
+                              <div key={index + line} className="text-primary">
+                                {line.replace(/BL /, "")}
+                              </div>
+                            );
                           }
                           return (
                             <div key={index + line}>
