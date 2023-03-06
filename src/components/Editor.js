@@ -105,7 +105,7 @@ export default function Editor() {
         </button>
       </div>
       <table
-        className="table table-dark table-striped"
+        className="table table-dark table-striped table-bordered"
         style={{ width: "100%" }}
       >
         <thead>
@@ -127,49 +127,96 @@ export default function Editor() {
           </tr>
         </thead>
         <tbody>
-          {data.map(({ description, image, unit, quantity, rate }, index) => (
-            <tr
-              className={
-                focussedItem === index
-                  ? "focussedItem text-center"
-                  : "text-center"
-              }
-              key={index}
-              onClick={() => setFocussedItem(index)}
-            >
-              <th scope="row">{index + 1}</th>
-              <td className="text-start">
-                {description
-                  ? description.split("\n").map((line, index) => {
-                      if (line.startsWith("HH ")) {
+          {data.map(
+            (
+              {
+                description,
+                serialNumber,
+                isHeader,
+                image,
+                unit,
+                quantity,
+                rate,
+              },
+              index
+            ) => (
+              <tr
+                className={
+                  focussedItem === index
+                    ? "focussedItem text-center"
+                    : "text-center"
+                }
+                key={index}
+                onClick={() => setFocussedItem(index)}
+              >
+                <th scope="row">{serialNumber}</th>
+                <td className="text-start">
+                  {description
+                    ? description.split("\n").map((line, index) => {
+                        if (line.startsWith("HH ")) {
+                          return (
+                            <div className="fw-bold h6" key={index + line}>
+                              {line.replace(/HH /, "")}
+                            </div>
+                          );
+                        } else if (line.startsWith("BB ")) {
+                          return (
+                            <div
+                              key={index + line}
+                              className="fw-semibold fst-italic"
+                            >
+                              {line.replace(/BB /, "")}
+                            </div>
+                          );
+                        } else if (line.startsWith("RR ")) {
+                          return (
+                            <div key={index + line} className="text-danger">
+                              {line.replace(/RR /, "")}
+                            </div>
+                          );
+                        }
                         return (
-                          <div className="fw-bold h6" key={index + line}>
-                            {line.replace(/HH /, "")}
+                          <div key={index + line}>
+                            {line.split("**").map((separatedText, index) =>
+                              index % 2 === 1 ? (
+                                <span
+                                  key={index + separatedText}
+                                  className="fw-semibold"
+                                >
+                                  {separatedText}
+                                </span>
+                              ) : (
+                                <span key={index + separatedText}>
+                                  {separatedText}
+                                </span>
+                              )
+                            )}
                           </div>
                         );
-                      } else if (line.startsWith("BB ")) {
-                        return (
-                          <div
-                            key={index + line}
-                            className="fw-semibold fst-italic"
-                          >
-                            {line.replace(/BB /, "")}
-                          </div>
-                        );
-                      }
-                      return <div key={index + line}>{line}</div>;
-                    })
-                  : null}
-              </td>
-              {/* <td>
+                      })
+                    : null}
+                </td>
+                {/* <td>
                 {image ? <img className="w-100" src={image} alt="" /> : ""}
               </td> */}
-              <td>{quantity || 0}</td>
-              <td>{unit}</td>
-              <td>{rate || 0}</td>
-              <td>{(quantity || 0) * (rate || 0)}</td>
-            </tr>
-          ))}
+                {isHeader ? (
+                  <>
+                    <td />
+                    <td />
+                    <td />
+                    <td />
+                  </>
+                ) : (
+                  <>
+                    <td>{quantity || 0}</td>
+                    <td>{unit}</td>
+                    <td>{rate || 0}</td>
+                    <td>{(quantity || 0) * (rate || 0)}</td>
+                  </>
+                )}
+              </tr>
+            )
+          )}
         </tbody>
       </table>
 
