@@ -1,9 +1,11 @@
 import * as React from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+const UNIT_VALUES = ["Sqft", "Rft", "Sq M", "Meter", "Nos.", "Lumpsum"];
+
 export default function Editor({ data = {}, onChange = () => {} }) {
   const [formData, setData] = React.useState(data);
-  const { description, image, HSN_SAC, quantity, rate } = formData;
+  const { description, unit, quantity, rate } = formData;
 
   const onChangeField = (field, value) => {
     const updatedData = {
@@ -17,21 +19,6 @@ export default function Editor({ data = {}, onChange = () => {} }) {
     onChange(formData);
   }, []);
 
-  const loadFile = (event) => {
-    const file = event.target.files[0];
-    const name = +new Date() + "-" + file.name;
-    const metadata = {
-      contentType: file.type,
-    };
-
-    const storage = getStorage();
-    const storageRef = ref(storage, name);
-    uploadBytes(storageRef, file, metadata).then(async (snapshot) => {
-      const url = await getDownloadURL(snapshot.ref);
-      onChangeField("image", url);
-      console.log("Uploaded a", url);
-    });
-  };
   return (
     <form>
       <div className="mb-3">
@@ -45,27 +32,6 @@ export default function Editor({ data = {}, onChange = () => {} }) {
           onChange={(e) => onChangeField("description", e.target.value)}
         />
 
-        <label htmlFor="description" className="mt-3 form-label">
-          Image
-        </label>
-        <input
-          className="form-control"
-          id="image"
-          type="file"
-          accept="image/*"
-          onChange={loadFile}
-        />
-        {image ? <img className="w-100" src={image} alt="hat be" /> : null}
-
-        <label htmlFor="HSN/SAC" className="mt-3 form-label">
-          HSN/SAC
-        </label>
-        <input
-          className="form-control"
-          id="HSN/SAC"
-          defaultValue={HSN_SAC}
-          onChange={(e) => onChangeField("HSN_SAC", e.target.value)}
-        />
         <label htmlFor="quantity" className="mt-3 form-label">
           Quantity
         </label>
@@ -75,6 +41,25 @@ export default function Editor({ data = {}, onChange = () => {} }) {
           defaultValue={quantity}
           onChange={(e) => onChangeField("quantity", e.target.value)}
         />
+        <label htmlFor="unit" className="mt-3 form-label">
+          Unit
+        </label>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          onChange={(e) => onChangeField("unit", e.target.value)}
+        >
+          <option selected={!unit} value="">
+            Open this select menu
+          </option>
+          <>
+            {UNIT_VALUES.map((UNIT) => (
+              <option key={UNIT} selected={UNIT === unit} value={UNIT}>
+                {UNIT}
+              </option>
+            ))}
+          </>
+        </select>
         <label htmlFor="rate" className="mt-3 form-label">
           Rate
         </label>

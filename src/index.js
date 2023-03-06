@@ -77,12 +77,12 @@ function App() {
   if (!user) {
     return (
       <div className="m-2">
-        <label htmlFor="HSN/SAC" className="mt-3 form-label">
+        <label htmlFor="Unit" className="mt-3 form-label">
           Username
         </label>
         <input
           className="form-control"
-          id="HSN/SAC"
+          id="Unit"
           onChange={(e) => updateLoginDetails("email", e.target.value)}
         />
         <label htmlFor="quantity" className="mt-3 form-label">

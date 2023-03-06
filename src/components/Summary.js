@@ -24,22 +24,14 @@ function Divider() {
   );
 }
 
-const COLS = [
-  "Sr. No.",
-  "Description",
-  "Image",
-  "HSN/SAC",
-  "QTY",
-  "Rate",
-  "Amount",
-];
+const COLS = ["Sr. No.", "Description", "Quantity", "Unit", "Rate", "Amount"];
 
 const COLS_SIZES = {
   "Sr. No.": 0.7,
   Description: 4,
   Image: 1.5,
-  "HSN/SAC": 1,
-  QTY: 0.5,
+  Unit: 1,
+  Quantity: 0.5,
   Rate: 0.5,
   Amount: 0.5,
 };
@@ -162,43 +154,38 @@ export default function Summary({
             </tr>
           </thead>
           <tbody>
-            {data.map(
-              ({ description, image, HSN_SAC, quantity, rate }, index) => (
-                <tr className="text-center" key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td className="text-start">
-                    {description
-                      ? description.split("\n").map((line, index) => {
-                          if (line.startsWith("HH ")) {
-                            return (
-                              <div className="fw-bold h6" key={index + line}>
-                                {line.replace(/HH /, "")}
-                              </div>
-                            );
-                          } else if (line.startsWith("BB ")) {
-                            return (
-                              <div
-                                key={index + line}
-                                className="fw-semibold fst-italic"
-                              >
-                                {line.replace(/BB /, "")}
-                              </div>
-                            );
-                          }
-                          return <div key={index + line}>{line}</div>;
-                        })
-                      : null}
-                  </td>
-                  <td>
-                    {image ? <img className="w-100" src={image} alt="" /> : ""}
-                  </td>
-                  <td>{HSN_SAC}</td>
-                  <td>{quantity}</td>
-                  <td>{to2DecimalPlaces(rate || 0)}</td>
-                  <td>{to2DecimalPlaces((quantity || 0) * (rate || 0))}</td>
-                </tr>
-              )
-            )}
+            {data.map(({ description, image, unit, quantity, rate }, index) => (
+              <tr className="text-center" key={index}>
+                <th scope="row">{index + 1}</th>
+                <td className="text-start">
+                  {description
+                    ? description.split("\n").map((line, index) => {
+                        if (line.startsWith("HH ")) {
+                          return (
+                            <div className="fw-bold h6" key={index + line}>
+                              {line.replace(/HH /, "")}
+                            </div>
+                          );
+                        } else if (line.startsWith("BB ")) {
+                          return (
+                            <div
+                              key={index + line}
+                              className="fw-semibold fst-italic"
+                            >
+                              {line.replace(/BB /, "")}
+                            </div>
+                          );
+                        }
+                        return <div key={index + line}>{line}</div>;
+                      })
+                    : null}
+                </td>
+                <td>{quantity}</td>
+                <td>{unit}</td>
+                <td>{to2DecimalPlaces(rate || 0)}</td>
+                <td>{to2DecimalPlaces((quantity || 0) * (rate || 0))}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <Divider />
