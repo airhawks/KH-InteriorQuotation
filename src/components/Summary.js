@@ -131,10 +131,7 @@ export default function Summary({ quotationDate = new Date() }) {
         <div className="row"></div>
         <div className="row"></div>
         <Divider />
-        <table
-          className="my-3 table table-striped table-bordered"
-          style={{ width: "100%" }}
-        >
+        <table className="my-3 table table-bordered" style={{ width: "100%" }}>
           <thead>
             <tr>
               {COLS.map((column) => (
@@ -167,14 +164,20 @@ export default function Summary({ quotationDate = new Date() }) {
                 },
                 index
               ) => (
-                <tr className="text-center" key={index}>
+                <tr
+                  className={`text-center ${isHeader ? "header-row" : ""}`}
+                  key={index}
+                >
                   <th scope="row">{serialNumber}</th>
                   <td className="text-start">
                     {description
                       ? description.split("\n").map((line, index) => {
                           if (line.startsWith("HH ")) {
                             return (
-                              <div className="fw-bold h6" key={index + line}>
+                              <div
+                                className="fw-bold h6 description-header"
+                                key={index + line}
+                              >
                                 {line.replace(/HH /, "")}
                               </div>
                             );

@@ -42,3 +42,16 @@ a:hover {
 tfoot th {
   font-weight: normal;
 }
+
+.header-row {
+  background-color: #058492;
+  color: white;
+}
+.header-row td {
+  border-width: 0;
+}
+
+.description-header {
+  margin-bottom: 0rem;
+  line-height: 1.5;
+}
